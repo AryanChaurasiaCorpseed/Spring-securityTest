@@ -3,7 +3,7 @@ package com.example.demo;
 import org.springframework.boot.SpringApplication;
 
 
-https://www.bezkoder.com/spring-boot-jwt-authentication/
+//https://www.bezkoder.com/spring-boot-jwt-authentication/
 	
 	
 	
