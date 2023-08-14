@@ -27,7 +27,7 @@ public class JwtUtils {
   private int jwtExpirationMs;
 
   public String generateJwtToken(Authentication authentication) {
-
+System.out.println("uspppppsp");
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
 
     return Jwts.builder()
