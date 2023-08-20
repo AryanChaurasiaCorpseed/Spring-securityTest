@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Spring-security-Test
+
+  cloud:
+    gateway:
+      routes:
+      - id: LEAD-SERVICE
+        uri: lb://LEAD-SERVICE
+        predicates:
+        - Paths=/**

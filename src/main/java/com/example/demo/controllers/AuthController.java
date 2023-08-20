@@ -55,13 +55,10 @@ public class AuthController {
 
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser( @RequestBody LoginRequest loginRequest) {
-
     Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(loginRequest.getUserName(), loginRequest.getPassword()));
-
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String jwt = jwtUtils.generateJwtToken(authentication);
-    
     UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();    
     List<String> roles = userDetails.getAuthorities().stream()
         .map(item -> item.getAuthority())
@@ -73,7 +70,45 @@ public class AuthController {
                          userDetails.getEmail(), 
                          roles));
   }
+  @PostMapping("/createNewUser")
+  public Boolean registerUserV2(@RequestBody SignupRequest signUpRequest) {
+//	  User user = new User(signUpRequest.getUsername(), 
+//              signUpRequest.getEmail(),
+//              encoder.encode(signUpRequest.getPassword()));
+	  User user = new User();
+	  user.setUsername(signUpRequest.getUsername());
+	  user.setEmail(signUpRequest.getEmail());
+	  user.setPassword(encoder.encode(signUpRequest.getPassword()));
+   Set<String> strRoles = signUpRequest.getRole();
+   Set<Role> roles = new HashSet<>();
 
+//   if (strRoles == null) {
+//     Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
+//     roles.add(userRole);
+//   } else {
+//     strRoles.forEach(role -> {
+//       switch (role) {
+//       case "admin":
+//         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN).get();
+//         roles.add(adminRole);
+//
+//         break;
+//       case "mod":
+//         Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR).get();
+//         roles.add(modRole);
+//
+//         break;
+//       default:
+//         Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
+//         roles.add(userRole);
+//       }
+//     });
+//   }
+
+   user.setRoles(roles);
+   userRepository.save(user);
+   return true;
+  }
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
     if (userRepository.existsByUsername(signUpRequest.getUsername())) {
