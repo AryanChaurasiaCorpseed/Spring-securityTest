@@ -67,6 +67,13 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         .authorizeHttpRequests(auth -> 
           auth.requestMatchers("/api/auth/**").permitAll()
               .requestMatchers("/api/test/**").permitAll()
+//              .requestMatchers("/swagger-ui/**").permitAll()
+              .requestMatchers("/swagger-ui/**",
+                      "/swagger-resources/*",
+                      "/v3/api-docs/**",
+                      "/dashboard-api-docs/**",
+                      "/dashboard-documentation/**")
+              .permitAll()
               .anyRequest().authenticated()
         );
     
