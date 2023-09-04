@@ -30,9 +30,9 @@ public class OpenAPIConfig {
     prodServer.setDescription("Server URL in Production environment");
 
     Contact contact = new Contact();
-    contact.setEmail("bezkoder@gmail.com");
-    contact.setName("BezKoder");
-    contact.setUrl("https://www.bezkoder.com");
+    contact.setEmail("aryan.chaurasia@corpseed.com");
+    contact.setName("Aryan");
+    contact.setUrl("https://www.corpseed.com");
 
     License mitLicense = new License().name("MIT License").url("https://choosealicense.com/licenses/mit/");
 
